@@ -3,7 +3,6 @@ import countryListItemsTemplate from '../template/country-list-item.hbs';
 import countriesListTemplate from '../template/countries-list.hbs';
 import PNotify from '../../node_modules/pnotify/dist/es/PNotify.js';
 import debounce from 'lodash.debounce';
-// import clickOutside from './clickOutside';
 import '../styles.css';
 
 const refs = {
@@ -11,6 +10,10 @@ const refs = {
   countryList: document.querySelector('#country-list'),
   searchInput: document.querySelector('.search__input'),
 };
+
+refs.searchForm.addEventListener('submit', event => {
+  event.preventDefault();
+});
 
 refs.searchForm.addEventListener(
   'input',
@@ -40,6 +43,9 @@ function searchFormInputHandler(e) {
     if (data.length === 1) {
       insertListItem(markup);
     }
+    if (!data.length) {
+      alert('Ничего не найдено.Корректно введите запрос');
+    }
   });
 }
 
@@ -58,3 +64,6 @@ function buildListItemMarkup(items) {
 function clearListItems() {
   refs.countryList.innerHTML = '';
 }
+
+// searchForm.addEventListener('input', e => e.preventDefault());
+// searchInput.addEventListener('input', e => e.preventDefault());
