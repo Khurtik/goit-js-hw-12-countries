@@ -1,9 +1,13 @@
+// const headers = { 'Content-Type': 'text/plain' };
+
 export default function fetchCountries(name) {
   return fetch(`https://restcountries.eu/rest/v2/name/${name}`)
     .then(response => {
-      return response.json();
+      if (name) {
+        return response.json();
+      } else {
+        return;
+      }
     })
-    .catch(err => {
-      console.error('Error: ', err);
-    });
+    .catch(error => console.log(error));
 }
